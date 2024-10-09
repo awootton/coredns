@@ -9,6 +9,18 @@
 [![Go Report Card](https://goreportcard.com/badge/github.com/coredns/coredns)](https://goreportcard.com/report/coredns/coredns)
 [![CII Best Practices](https://bestpractices.coreinfrastructure.org/projects/1250/badge)](https://bestpractices.coreinfrastructure.org/projects/1250)
 
+### atw was here:
+This project adds a knotfree plugin to serve dns for .id .iot and .vr tld's
+Note this is not for serving DNS *in* the cluster.
+#### Build and deploy
+    go generate
+    docker build -t gcr.io/fair-theater-238820/knotfreecoredns .
+    docker push gcr.io/fair-theater-238820/knotfreecoredns 
+    XXXXX not kubectl apply -f knotfree-coredns-k8s.yaml
+    see install.sh
+ 
+#### 
+
 CoreDNS is a DNS server/forwarder, written in Go, that chains [plugins](https://coredns.io/plugins).
 Each plugin performs a (DNS) function.
 
