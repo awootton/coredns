@@ -66,6 +66,10 @@ github.com/apparentlymart/go-cidr v1.1.0 h1:2mAhrMoF+nhXqxTzSZMUzDHkLjmIHC+Zzn4t
 github.com/apparentlymart/go-cidr v1.1.0/go.mod h1:EBcsNrHc3zQeuaeCeCtQruQm+n9/YjEn/vI25Lg7Gwc=
 github.com/awootton/knotfreeiot v0.3.4 h1:dHekTcOAuMBSKxOUa3bkkVNCqOCobSOGL7G4uYj75Bc=
 github.com/awootton/knotfreeiot v0.3.4/go.mod h1:L6HueW0OrZvUoL7FfV8OuQo4xOD2q1a+NNmFfkKYWhg=
+github.com/awootton/knotfreeiot v0.3.5 h1:oIRUHND8n3fZbEJMb41Y5xQz2ljNkZWIy4GhGaUBmMQ=
+github.com/awootton/knotfreeiot v0.3.5/go.mod h1:L6HueW0OrZvUoL7FfV8OuQo4xOD2q1a+NNmFfkKYWhg=
+github.com/awootton/knotfreeiot v0.3.6 h1:lyStd6SJ9pb5dGfD4yGxJ3LHi1ZMzBchfOWSln7v84w=
+github.com/awootton/knotfreeiot v0.3.6/go.mod h1:L6HueW0OrZvUoL7FfV8OuQo4xOD2q1a+NNmFfkKYWhg=
 github.com/awootton/libmqtt v0.2.0 h1:ixm6yxxpSuzzaVntZ+OFhlHCLzLoaRSapuwsVcUbZQ4=
 github.com/awootton/libmqtt v0.2.0/go.mod h1:DLQ2LGP/HlxW9T378hjUJkYPIIm7JCq6EvJO/YfISC4=
 github.com/aws/aws-sdk-go v1.53.5 h1:1OcVWMjGlwt7EU5OWmmEEXqaYfmX581EK317QJZXItM=

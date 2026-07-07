@@ -2,7 +2,7 @@ module github.com/coredns/coredns
 
 go 1.21
 
-// github.com/awootton/knotfreeiot v0.3.0
+// github.com/awootton/knotfreeiot v0.3.6
 // remove this for prod and after development
 // it will not be v0.3.0
 // replace github.com/awootton/knotfreeiot v0.3.1 => ../knotfreeiot
@@ -13,7 +13,7 @@ require (
 	github.com/Azure/go-autorest/autorest/azure/auth v0.5.12
 	github.com/antonmedv/expr v1.15.5
 	github.com/apparentlymart/go-cidr v1.1.0
-	github.com/awootton/knotfreeiot v0.3.4
+	github.com/awootton/knotfreeiot v0.3.6
 	github.com/aws/aws-sdk-go v1.53.5
 	github.com/coredns/caddy v1.1.1
 	github.com/dnstap/golang-dnstap v0.4.0

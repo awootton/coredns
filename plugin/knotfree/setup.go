@@ -53,7 +53,9 @@ func setup(c *caddy.Controller) error {
 		token := os.Getenv("KNOTFREE_TOKEN")
 		if token == "" {
 			fmt.Println("No KNOTFREE_TOKEN environment variable set, using default token")
-			token, _ = tokens.GetImpromptuGiantTokenLocal("", "")
+			tokenTmp, payload := tokens.GetImpromptuGiantTokenLocal("", "")
+			fmt.Println("Using token", tokenTmp, "with payload", payload)
+			token = tokenTmp
 		}
 		kf.sc, err = iot.StartNewServiceContactTcp(host, token)
 		if err != nil {

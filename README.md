@@ -11,14 +11,83 @@
 
 ### atw was here:
 This project adds a knotfree plugin to serve dns for .id .iot and .vr tld's
-Note this is not for serving DNS *in* the cluster.
+It falls through and forwards requests to a normal DNS server for other tld's
+Note this is not for serving DNS *in* the k8s cluster.
+You can just use it as a regular DNS server if you wish. It's dns.gotohere.com
+1.1.1.1 is pretty good too though. 
+
+It only serves A and TXT right now for .id .iot and .vr tld's.
+
+note: fair-theater-238820 is dead. f you google for making me upgrade. moving to docker docker.io/alanwootton2/knotfreecoredns 
+
 #### Build and deploy
     go generate
-    docker build -t gcr.io/fair-theater-238820/knotfreecoredns .
-    docker push gcr.io/fair-theater-238820/knotfreecoredns 
-    XXXXX not kubectl apply -f knotfree-coredns-k8s.yaml
+    #### dead now docker build -t gcr.io/fair-theater- 238820/knotfreecoredns .
+    docker build -t docker.io/alanwootton2/knotfreecoredns .
+
+    #### no gcr, thanks - docker push gcr.io/fair-theater- 238820/knotfreecoredns 
+    docker push docker.io/alanwootton2/knotfreecoredns 
+
     see install.sh
+
+    ## to test:
+
+    // testmain-0n0u0e16p-0.vr is a vr domain name.
+
+    dig @149.28.250.163 testmain-0n0u0e16p-0.vr TXT
+            default_value
+
+    dig @149.28.250.163 meta.testmain-0n0u0e16p-0.vr TXT
+            meta_group_id_val
+
+    dig @149.28.250.163 _meta_group_id.testmain-0n0u0e16p-0.vr TXT
+            _meta_group_id_val
+
+    dig @149.28.250.163 meta_group_id.testmain-0n0u0e16p-0.vr TXT
+            meta_group_id-no-leading-underscore
+
+
+    dig @149.28.250.163 meta_group_id.testmain-0n0u0e16p.vr TXT
+            status: topic not found errid=bvBbhJawYXIMWsxJOWHt
+
+
+    This is the main one:
+    dig @149.28.250.163 alan-t-wootton.iot TXT
+        if this returns default_value then it's up. Otherwise, weep.
+        I mean ssh to the server and 'docker ps' and figure it out.
+
+    And this, same thing:
+    dig @dns.gotohere.com alan-t-wootton.iot TXT
+
+    dig @dns.gotohere.com testmain-1n0u1w13p.vr // I had trouble with this one (it doesn't exist, and it's not supposed to)
+
+    dig dns.gotohere.com
+         149.28.250.163 
+
+    note that we can use the name of of the server now:
+    dig @dns.gotohere.com alan-t-wootton.iot TXT
+        returns default_value
+
+    dig @149.28.250.163 alan-t-wootton.iot
+        // 216.128.128.195 is knotfree.io (not secure)
+    dig @149.28.250.163 alan-t-wootton.iot TXT
+        default_value
+    dig @149.28.250.163 txttest1.alan-t-wootton.iot TXT
+        error: not foundTXT txttest1 
+
+    dig @149.28.250.163 gotohere.com
+    dig @149.28.250.163 gotohere.com TXT
+        "v=spf1 include:_spf.tierra.net include:mailgun.org ~all"
+    dig @149.28.250.163 _dmarc.gotohere.com TXT
+        "v=DMARC1; p=none; etc
  
+    # when running locally:
+    dig @127.0.0.1 gotohere.com
+
+    dig @127.0.0.1 my-cool-new-iot-name.iot TXT
+
+
+
 #### 
 
 CoreDNS is a DNS server/forwarder, written in Go, that chains [plugins](https://coredns.io/plugins).

@@ -13,4 +13,6 @@
             "env": {"TARGET_CLUSTER": "localhost:8384"},
         }
     ]
+    // "env": {"TARGET_CLUSTER": "localhost:8384"},
+    // "env": {"TARGET_CLUSTER": "knotfree.io:8384"},
 }

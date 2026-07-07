@@ -27,7 +27,7 @@ spec:
       containers:
       - name: golang
         imagePullPolicy: Always
-        image: gcr.io/fair-theater-238820/knotfreecoredns 
+        image: docker.io/alanwootton2/knotfreecoredns 
         command: ["./coredns"]      
         # TODO:
         # readinessProbe:

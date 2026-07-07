@@ -77,7 +77,9 @@ func (e Knotfree) ServeDNS(ctx context.Context, w dns.ResponseWriter, r *dns.Msg
 	// it could be a name like get.option.a.get-unix-time.iot
 	// we remove the sub names
 	parts := strings.Split(subscriptionName, ".")
+	subkey := ""
 	if len(parts) > 2 {
+		subkey = parts[0]
 		parts = parts[len(parts)-2:]
 	}
 	subscriptionName = strings.Join(parts, "_")
@@ -85,8 +87,9 @@ func (e Knotfree) ServeDNS(ctx context.Context, w dns.ResponseWriter, r *dns.Msg
 	log.Info("Received request for ", subscriptionName, " ", qtype) // eg a-person-channel.iot
 
 	// let's get it from the service contact
-	// TODO: test add subtypes
-	command := "get option " + strings.ToUpper(qtype) // eg get option A
+
+	command := "get option " + strings.ToUpper(qtype) + " " + subkey // eg get option A
+
 	cmd := packets.Lookup{}
 	cmd.Address.FromString(subscriptionName)
 	cmd.SetOption("cmd", []byte(command))
@@ -102,11 +105,27 @@ func (e Knotfree) ServeDNS(ctx context.Context, w dns.ResponseWriter, r *dns.Msg
 		log.Error("knotfree failed to get 'send' from service contact", err, replyPacket.Sig())
 		return dns.RcodeServerFailure, err
 	}
-	log.Info("knotfree returned message", string(sendPacket.Payload))
+	log.Info("knotfree returned message ", string(sendPacket.Payload))
 
 	// Create a new response message. We use the message from the request in our response.
 
 	// TODO: do the rest of the types
+	if qtype == "TXT" {
+		rr := new(dns.TXT)
+		rr.Hdr = dns.RR_Header{Name: qname, Rrtype: dns.TypeTXT, Class: dns.ClassINET}
+		str := string(sendPacket.Payload)
+		rr.Txt = []string{str}
+		answers := []dns.RR{}
+		answers = append(answers, rr)
+
+		m := new(dns.Msg)
+		m.SetReply(r)
+		m.Authoritative = true
+		m.Answer = answers
+
+		w.WriteMsg(m)
+		return dns.RcodeSuccess, nil
+	}
 	rr := new(dns.A)
 	rr.Hdr = dns.RR_Header{Name: qname, Rrtype: dns.TypeA, Class: dns.ClassINET}
 	str := string(sendPacket.Payload)
