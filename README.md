@@ -23,7 +23,7 @@ note: fair-theater-238820 is dead. f you google for making me upgrade. moving to
 #### Build and deploy
     go generate
     #### dead now docker build -t gcr.io/fair-theater- 238820/knotfreecoredns .
-    docker build -t docker.io/alanwootton2/knotfreecoredns .
+    docker build  --platform linux/amd64 -t docker.io/alanwootton2/knotfreecoredns .
 
     #### no gcr, thanks - docker push gcr.io/fair-theater- 238820/knotfreecoredns 
     docker push docker.io/alanwootton2/knotfreecoredns 

@@ -19,7 +19,7 @@ scp ~/atw_private/giantToken.txt root@$TARGET:/root/atw/giantToken.txt
 scp ~/atw/privateKeys4.txt root@$TARGET:/root/atw/privateKeys4.txt
 
 
-docker build -t docker.io/alanwootton2/knotfreecoredns .
+docker build  --platform linux/amd64 -t docker.io/alanwootton2/knotfreecoredns .
 docker push docker.io/alanwootton2/knotfreecoredns 
 
 # log in:
